@@ -1,5 +1,6 @@
 package nuc.zm.api;
 
+import nuc.zm.exception.ConditonException;
 import nuc.zm.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class DemoApi {
 
     @GetMapping("/query")
     public Map<String , Object> query(String  name) {
-        return demoService.query(name);
+        throw new ConditonException("我是一个错误");
     }
 
 }
