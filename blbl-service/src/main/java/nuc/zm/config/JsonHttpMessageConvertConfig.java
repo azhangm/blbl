@@ -21,6 +21,7 @@ import java.util.List;
 @Configuration
 public class JsonHttpMessageConvertConfig {
 
+//    自定义 json 转换
     @Bean
     @Primary
     public HttpMessageConverters fastJsonHttpMessageConverters() {
