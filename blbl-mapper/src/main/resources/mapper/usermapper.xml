@@ -3,6 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nuc.zm.mapper.UserMapper">
+    <update id="updateUserInfos"  parameterType="nuc.zm.pojo.UserInfo" >
+        update
+         t_user_info
+        set
+        <if test="nick != null and nick != '' ">
+          nick = #{nick},
+       </if>
+        <if test="avatar != null">
+            avatar = #{avatar},
+        </if>
+        <if test="sign != null">
+             sign = #{sign},
+        </if>
+        <if test="birth != null and birth != '' " >
+            birth = #{birth},
+        </if>
+        <if test="gender  != null and gender != ''">
+            gender = #{gender},
+        </if>
+            updateTime = #{updateTime}
+        where userId = #{userId}
+    </update>
     <insert id="addUser" parameterType="nuc.zm.pojo.User" useGeneratedKeys="true" keyProperty="id">
             insert into t_user
             (phone,email,password,salt,createTime,updateTime)
@@ -22,7 +44,7 @@
                 avatar,
                 sign,
                 gender,
-                brith,
+                birth,
                 createTime,
                 updateTime)
         values (
@@ -31,7 +53,7 @@
                 #{avatar},
                 #{sign},
                 #{gender},
-                #{brith},
+                #{birth},
                 #{createTime},
                 #{updateTime});
     </insert>
@@ -45,5 +67,15 @@
         select id
         from t_user
         where #
+    </select>
+    <select id="getUserById" resultType="nuc.zm.pojo.User" parameterType="java.lang.Long">
+        select *
+        form t_user
+        from id = #{currentId};
+    </select>
+    <select id="getUserInfoByUserId" resultType="nuc.zm.pojo.UserInfo" parameterType="java.lang.Long">
+        select *
+        from t_user_info
+        where id = #{currentId}
     </select>
 </mapper>

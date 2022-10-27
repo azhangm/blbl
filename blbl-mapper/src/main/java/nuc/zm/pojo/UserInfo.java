@@ -22,7 +22,7 @@ public class UserInfo {
 
     private String gender;
 
-    private String  brith;
+    private String  birth;
 
     private Date createTime;
 
@@ -30,6 +30,14 @@ public class UserInfo {
 
     public Long getId() {
         return id;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
     public void setId(Long id) {
@@ -76,13 +84,7 @@ public class UserInfo {
         this.gender = gender;
     }
 
-    public String getBrith() {
-        return brith;
-    }
 
-    public void setBrith(String brith) {
-        this.brith = brith;
-    }
 
     public Date getCreateTime() {
         return createTime;

@@ -55,7 +55,7 @@ public class UserService {
         UserInfo userInfo = new UserInfo();
         userInfo.setUserId(user.getId());
         userInfo.setNick(UserConstant.DEFAULT_NIKC);
-        userInfo.setBrith(UserConstant.DEFAULT_BIRTH);
+        userInfo.setBirth(UserConstant.DEFAULT_BIRTH);
         userInfo.setGender(UserConstant.GENDER_UNKNOW);
         userInfo.setCreateTime(now);
         userInfo.setUpdateTime(now);
@@ -63,10 +63,10 @@ public class UserService {
     }
 
     private User getUserByPhone(String phone) {
-        return userMapper.getUserByPhone();
+        return userMapper.getUserByPhone(phone);
     }
 
-    public String login(User user) {
+    public String login(User user) throws Exception {
         String phone = user.getPhone();
         if (StringUtils.isNullOrEmpty(phone)) {
             throw new ConditonException("手机号不能为空");
@@ -90,5 +90,17 @@ public class UserService {
         }
        return TokenUtil.generateToken(userByPhone.getId());
 
+    }
+
+    public User getUserInfo(Long currentId) {
+        User userById = userMapper.getUserById(currentId);
+        UserInfo userInfoByUserId = userMapper.getUserInfoByUserId(currentId);
+        userById.setUserInfo(userInfoByUserId);
+        return userById;
+    }
+
+    public void updateUserInfos(UserInfo userInfo) {
+        userInfo.setUpdateTime(new Date());
+        userMapper.updateUserInfos(userInfo);
     }
 }

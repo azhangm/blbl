@@ -42,8 +42,8 @@ public class RestFulApi {
     public String postData(@RequestBody Map<String,Object> map) {
         Integer[] integers = dataMap.keySet().toArray(new Integer[0]);
         Arrays.sort(integers);
-        Integer ids = integers.length;
-        dataMap.put(ids,map);
+        Integer ids = integers.length - 1;
+        dataMap.put(integers[ids] + 1,map);
         System.out.println(dataMap.get(ids).get("name"));
         return  "post success";
     }
@@ -55,9 +55,9 @@ public class RestFulApi {
         Map<String, Object> stringObjectMap = dataMap.get(id);
         if (stringObjectMap == null) {
             Integer[] integers = dataMap.keySet().toArray(new Integer[0]);
+            int ids = integers.length - 1;
             Arrays.sort(integers);
-            Integer ids = integers.length - 1;
-            dataMap.put(ids,map);
+            dataMap.put(integers[ids],map);
         }else {
             dataMap.put(id,map);
         }

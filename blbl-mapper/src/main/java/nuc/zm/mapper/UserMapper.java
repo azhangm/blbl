@@ -13,11 +13,17 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    User getUserByPhone();
+    User getUserByPhone(String phone);
 
     Integer addUser(User user);
 
     Integer addUserInfo(UserInfo userInfo);
 
     User getUserByPassword(String password);
+
+    User getUserById(Long currentId);
+
+    UserInfo getUserInfoByUserId(Long currentId);
+
+    Integer updateUserInfos(UserInfo userInfo);
 }
